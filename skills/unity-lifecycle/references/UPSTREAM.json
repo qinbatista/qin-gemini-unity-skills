@@ -1,0 +1,19 @@
+{
+  "repo": "https://github.com/qinbatista/qin-unity-skills",
+  "branch": "master",
+  "commit": "aabc09b2964de0065d69363ea8c70733ddce8b57",
+  "commit_date": "2026-11-22T16:08:16-08:00",
+  "commit_subject": "Measure separation between individual effect pieces",
+  "synced_at": "2026-11-22",
+  "mirrored_skills": [
+    "unity-animation-skill",
+    "unity-assets-skill",
+    "unity-code-skill",
+    "unity-effects-skill",
+    "unity-testing-skill",
+    "unity-ui-skill"
+  ],
+  "generated_files": [
+    "skills/unity-lifecycle/references/global-skill-routing.md"
+  ]
+}

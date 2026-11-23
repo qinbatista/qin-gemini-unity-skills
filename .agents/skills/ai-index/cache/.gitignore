@@ -1,0 +1,9 @@
+*
+!.gitignore
+!README.md
+!owners.json
+
+# managed-cache-current-start
+current.json
+*.pending
+# managed-cache-current-end

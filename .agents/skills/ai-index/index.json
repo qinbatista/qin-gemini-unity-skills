@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "rules": {
+    "repository": ".agents/skills/ai-index/repository.md",
+    "structure": ".agents/skills/ai-index/structure.md",
+    "verification": ".agents/skills/ai-index/verification.md"
+  },
+  "modules": [
+    {
+      "id": "unity-template-sync",
+      "summary": "Repeatable upstream sync from qin-unity-skills, Antigravity routing generation, and global deployment.",
+      "document": ".agents/skills/ai-index/lifecycle.md",
+      "sources": [
+        "skills/unity-lifecycle/SKILL.md",
+        "skills/unity-lifecycle/references/UPSTREAM.json",
+        "skills/unity-lifecycle/references/global-skill-routing.md",
+        "skills/unity-lifecycle/scripts/sync_from_template.py",
+        "skills/unity-lifecycle/scripts/deploy_local.py",
+        "skills/unity-lifecycle/scripts/sync_check.py",
+        "PORTING.md"
+      ],
+      "dependencies": [
+        {
+          "module": "mirrored-unity-skills",
+          "reason": "Template sync mirrors all upstream unity-*-skill directories and derives Antigravity routing from unity-code-skill."
+        },
+        {
+          "module": "verification",
+          "reason": "Sync and deployment verify frontmatter, links, read_topic.py runtime, portability, and tests."
+        }
+      ],
+      "code_targets": [
+        {
+          "id": "sync-from-template",
+          "file": "skills/unity-lifecycle/scripts/sync_from_template.py",
+          "symbol": "sync_from_template",
+          "anchor": "def sync_from_template(*, repo_root=REPO_ROOT, repo_url=DEFAULT_UPSTREAM_REPO, branch=DEFAULT_UPSTREAM_BRANCH, upstream_dir=None, apply_changes=False, deploy_local_flag=False, verify_flag=False, config_dir=None):",
+          "summary": "Fetch upstream qin-unity-skills into Cache/temp-*, mirror *-skill folders verbatim, regenerate Antigravity routing and UPSTREAM.json, and optionally deploy and verify."
+        },
+        {
+          "id": "deploy-local",
+          "file": "skills/unity-lifecycle/scripts/deploy_local.py",
+          "symbol": "deploy",
+          "anchor": "def deploy(*, repo_root=None, config_dir=None):",
+          "summary": "Deploy Unity global skills to ~/.gemini/config/skills/ and register skills.json while preserving core skills, GEMINI.md, and Codex isolation."
+        }
+      ]
+    },
+    {
+      "id": "mirrored-unity-skills",
+      "summary": "Verbatim upstream Unity global Skills mirrored from qin-unity-skills (code, assets, ui, animation, effects, testing).",
+      "document": ".agents/skills/ai-index/structure.md",
+      "sources": [
+        "skills/unity-animation-skill",
+        "skills/unity-assets-skill",
+        "skills/unity-code-skill",
+        "skills/unity-effects-skill",
+        "skills/unity-testing-skill",
+        "skills/unity-ui-skill"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "verification",
+      "summary": "Local Antigravity Unity verification, routing link checks, read_topic runtime checks, and template-sync unit tests.",
+      "document": ".agents/skills/ai-index/verification.md",
+      "sources": [
+        "skills/unity-lifecycle/scripts/verify_skills_local.py",
+        "skills/unity-lifecycle/tests/test_sync_from_template.py",
+        "skills/unity-code-skill/tests/test_csharp_rule_guard.py"
+      ],
+      "dependencies": [],
+      "code_targets": [
+        {
+          "id": "verify-local",
+          "file": "skills/unity-lifecycle/scripts/verify_skills_local.py",
+          "symbol": "verify_all",
+          "anchor": "def verify_all(*, repo_root=None, config_dir=None, with_tests=False):",
+          "summary": "Verify UPSTREAM.json, skills.json, deployed Unity skill frontmatter and AST, routing links, read_topic.py runtime, portability, and unit tests."
+        }
+      ]
+    }
+  ]
+}
